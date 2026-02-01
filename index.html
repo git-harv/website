@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Harvey Lewis</title>
+  <meta name="description" content="Personal site for Harvey Lewis, A‑levels student." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%232563eb' width='100' height='100' rx='20'/%3E%3Ctext x='50' y='57' font-size='50' text-anchor='middle' fill='white' font-family='Arial, Helvetica, sans-serif'%3EW%3C/text%3E%3C/svg%3E">
+  <style>
+    /* 2000s retro full-bleed theme */
+    :root{--bgA:#022030;--bgB:#1b0033;--accent1:#aa3333;--accent2:#ff3333;--muted:#ffaaaa}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Verdana,Helvetica,Arial,sans-serif;background:linear-gradient(135deg,var(--bgA),var(--bgB));color:#fffff}
+
+    /* retro grid/pattern */
+    .grain{position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);background-size:3px 3px;mix-blend-mode:overlay;opacity:0.35}
+    .scan{position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(transparent 60%, rgba(255,255,255,0.02) 60%);background-size:100% 6px;opacity:0.2}
+
+    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+    .card{width:100%;max-width:900px;height:auto;padding:36px;border-radius:12px;background:rgba(11,12,32,0.4);backdrop-filter:blur(8px);border:2px solid var(--accent1);box-shadow:0 0 30px rgba(255,0,0,0.5),inset 0 0 20px rgba(255,0,0,0.3);display:flex;align-items:center;position:relative}
+
+    .brand{display:flex;gap:20px;align-items:center;padding:20px}
+    .logo{width:96px;height:96px;border-radius:12px;display:grid;place-items:center;font-weight:900;color:#071022;background:linear-gradient(135deg,var(--accent1),var(--accent2));font-size:22px;box-shadow:0 8px 40px rgba(0,0,0,0.6)}
+
+    .title{font-family:Impact,Charcoal,Arial Black,sans-serif;font-size:3.2rem;margin:0;color:var(--accent1);text-shadow:0 0 18px rgba(0,229,255,0.12),2px 2px 0 rgba(0,0,0,0.6)}
+    .subtitle{font-size:1rem;color:var(--muted);margin-top:6px}
+
+    .row{display:flex;gap:12px;align-items:center;margin-top:18px}
+    .btn{display:inline-block;padding:10px 14px;border-radius:6px;text-decoration:none;color:#061026;background:linear-gradient(90deg,var(--accent1),var(--accent2));font-weight:700}
+
+    .social{position:absolute;right:22px;top:22px;display:flex;gap:10px}
+    .social a{padding:8px 10px;border-radius:6px;background:rgba(255,255,255,0.03);color:var(--accent1);text-decoration:none;font-weight:700}
+
+    .content{margin-left:140px}
+    .visits{background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:6px;color:var(--muted);font-weight:700}
+
+    @media (max-width:720px){.brand{flex-direction:column;align-items:flex-start}.logo{width:72px;height:72px}.title{font-size:1.8rem}.content{margin-left:0}.card{padding:24px;border-radius:10px}.wrap{padding:16px}}
+  </style>
+</head>
+<body>
+  <main class="wrap" id="app">
+    <div class="card" role="main">
+      <div class="grain"></div>
+      <div class="scan"></div>
+      <div class="brand">
+        <div class="logo">:p</div>
+        <div class="content">
+          <h1 class="title">HARVEY LEWIS</h1>
+          <div class="subtitle">16 • A-levels student — aspiring Mathematician</div>
+          <div class="row" style="margin-top:20px">
+            <a class="btn" href="mailto:admin@harveylewis.co.uk">email</a>
+          </div>
+        </div>
+      </div>
+      <div class="social" aria-hidden="false">
+        <a href="https://www.linkedin.com/in/harvey-lewis-791176300/" title="LinkedIn">LinkedIn</a>
+      </div>
+      <footer style="position:absolute;left:22px;bottom:18px;color:var(--muted);font-size:0.9rem">© Harvey Lewis</footer>
+    </div>
+  </main>
+</body>
+</html>
