@@ -13,21 +13,22 @@
       --accent1: #aa3333;
       --accent2: #ff3333;
       --muted: #ffaaaa;
-      --cardBg: rgba(11, 12, 32, 0.6);
+      --cardBg: rgba(11, 12, 32, 0.85);
     }
 
     * { box-sizing: border-box; }
     
-    html, body { 
-      height: 100%; 
-      margin: 0; 
-      overflow-x: hidden;
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
+      margin: 0;
       font-family: Verdana, Helvetica, Arial, sans-serif;
       background: linear-gradient(135deg, var(--bgA), var(--bgB));
+      background-attachment: fixed;
       color: #ffffff;
+      min-height: 100vh;
     }
 
     /* Overlays */
@@ -48,32 +49,94 @@
       pointer-events: none;
       background-image: linear-gradient(transparent 60%, rgba(255, 255, 255, 0.02) 60%);
       background-size: 100% 6px;
-      opacity: 0.2;
+      opacity: 0.15;
       z-index: 11;
     }
 
-    /* Layout */
-    .wrap {
-      min-height: 100vh;
+    /* Home Button */
+    .home-btn {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: bold;
+      z-index: 100;
+      box-shadow: 0 0 15px var(--accent1);
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+    }
+
+    .home-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px var(--accent2);
+    }
+
+    /* Parallax Structure */
+    .parallax-wrapper {
+      position: relative;
+    }
+
+    /* Hero Landing Section - Now reacts to scroll via JS */
+    .hero-section {
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      transition: opacity 0.1s linear;
+      will-change: transform, opacity;
+    }
+
+    /* Container for secondary cards */
+    .scroll-container {
+      position: relative;
+      z-index: 2;
+      background: transparent;
+      padding-top: 50vh; /* Keeps hero visible for a bit */
+      padding-bottom: 100px;
+    }
+
+    .container-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 120px;
     }
 
     .card {
       width: 100%;
-      max-width: 800px;
       padding: 48px;
       border-radius: 12px;
       background: var(--cardBg);
       backdrop-filter: blur(12px);
       border: 2px solid var(--accent1);
-      box-shadow: 0 0 30px rgba(255, 0, 0, 0.3), inset 0 0 20px rgba(255, 0, 0, 0.1);
-      display: flex;
-      flex-direction: column;
+      box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.2);
       position: relative;
       overflow: hidden;
+    }
+
+    /* Hero card specifically needs a transition for the parallax effect */
+    #hero-card {
+      transition: transform 0.1s linear, opacity 0.1s linear;
+    }
+
+    /* Secondary cards entrance animation */
+    .scroll-container .card {
+      transform: translateY(100px);
+      opacity: 0;
+      transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s ease;
     }
 
     .brand {
@@ -83,7 +146,6 @@
       z-index: 2;
     }
 
-    /* Image Styling */
     .profile-img {
       width: 120px;
       height: 120px;
@@ -92,19 +154,12 @@
       border: 2px solid var(--accent1);
       box-shadow: 0 0 20px rgba(170, 51, 51, 0.5);
       background: var(--bgA);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .profile-img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px var(--accent2);
     }
 
     .content {
       flex: 1;
     }
 
-    /* Typography */
     .title {
       font-family: Impact, Charcoal, 'Arial Black', sans-serif;
       font-size: 3.5rem;
@@ -124,7 +179,30 @@
       font-weight: bold;
     }
 
-    /* Buttons */
+    .section-title {
+      font-family: Impact, sans-serif;
+      color: var(--accent1);
+      font-size: 2.2rem;
+      margin-top: 0;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent1), transparent);
+    }
+
+    .text-body {
+      line-height: 1.8;
+      color: #e0e0e0;
+      font-size: 1.1rem;
+    }
+
     .row {
       display: flex;
       gap: 12px;
@@ -150,10 +228,8 @@
     .btn:hover {
       background: var(--accent2);
       box-shadow: 0 0 15px var(--accent2);
-      transform: translateY(-2px);
     }
 
-    /* Socials */
     .social {
       position: absolute;
       right: 24px;
@@ -177,78 +253,151 @@
     .social a:hover {
       border-color: var(--accent1);
       color: var(--accent1);
-      background: rgba(170, 51, 51, 0.1);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: bounce 2s infinite;
+      text-decoration: none;
+      opacity: 0.7;
+      z-index: 5;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+      40% {transform: translateX(-50%) translateY(-10px);}
+      60% {transform: translateX(-50%) translateY(-5px);}
     }
 
     footer {
-      margin-top: 40px;
+      text-align: center;
+      padding: 60px 0;
       color: var(--muted);
       font-size: 0.75rem;
       opacity: 0.6;
       letter-spacing: 1px;
     }
 
-    /* Responsive */
     @media (max-width: 720px) {
-      .brand {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-      }
-      .profile-img {
-        width: 100px;
-        height: 100px;
-      }
-      .title {
-        font-size: 2.2rem;
-      }
-      .card {
-        padding: 32px;
-        margin: 16px;
-      }
-      .row {
-        justify-content: center;
-      }
-      .social {
-        position: static;
-        margin-bottom: 20px;
-        justify-content: center;
-      }
+      .brand { flex-direction: column; text-align: center; gap: 20px; }
+      .profile-img { width: 100px; height: 100px; }
+      .title { font-size: 2.2rem; }
+      .card { padding: 32px; }
+      .row { justify-content: center; }
+      .social { position: static; margin-bottom: 20px; justify-content: center; }
+      .scroll-container { padding-top: 20vh; }
     }
   </style>
 </head>
-<body>
+<body id="top">
   <div class="grain"></div>
   <div class="scan"></div>
 
-  <main class="wrap">
-    <div class="card">
-      <!-- Top Socials -->
-      <div class="social">
-        <a href="https://www.linkedin.com/in/harvey-lewis-791176300/" target="_blank">LINKEDIN</a>
-      </div>
+  <a href="#top" class="home-btn" title="Go to top">H</a>
 
-      <div class="brand">
-        <!-- Profile Image with fallback -->
-        <img 
-          src="hldog.png" 
-          alt="Harvey Lewis" 
-          class="profile-img" 
-          onerror="this.src='https://via.placeholder.com/120/022030/aa3333?text=HL'"
-        >
-        
-        <div class="content">
-          <h1 class="title">HARVEY LEWIS</h1>
-          <div class="subtitle">16 &bull; A-Levels Student &bull; Aspiring Mathematician</div>
+  <div class="parallax-wrapper">
+    <!-- Hero Landing Section -->
+    <section class="hero-section" id="hero-section">
+      <div class="card" id="hero-card" style="max-width: 900px;">
+        <div class="social">
+          <a href="https://www.linkedin.com/in/harvey-lewis-791176300/" target="_blank">LINKEDIN</a>
+        </div>
+
+        <div class="brand">
+          <img 
+            src="hldog.png" 
+            alt="Harvey Lewis" 
+            class="profile-img" 
+            onerror="this.src='https://via.placeholder.com/120/022030/aa3333?text=HL'"
+          >
           
-          <div class="row">
-            <a class="btn" href="mailto:admin@harveylewis.co.uk">Get in Touch</a>
+          <div class="content">
+            <h1 class="title">HARVEY LEWIS</h1>
+            <div class="subtitle">16 &bull; A-Levels Student &bull; Aspiring Mathematician</div>
+            
+            <div class="row">
+              <a class="btn" href="mailto:admin@harveylewis.co.uk">Get in Touch</a>
+              <a class="btn" href="#about" style="background:transparent; border:1px solid var(--accent1)">Learn More</a>
+            </div>
           </div>
         </div>
       </div>
+      <a href="#about" class="scroll-hint" id="scroll-hint">Scroll Down &#8595;</a>
+    </section>
 
-      <footer>&copy; 2026 HARVEY LEWIS //footer>
+    <!-- Scrollable content -->
+    <div class="scroll-container">
+      <div class="container-inner">
+        <div class="card" id="about">
+          <h2 class="section-title">ABOUT ME</h2>
+          <div class="text-body">
+            <p>Currently in Year 12 I have grown deep passion for mathematics and problem-solving. I love the process of discovering a difficult problem and being able to slowly unravel the solution through logic and reasoning.</p>
+            <p>I want to work somewhere doing something I truly enjoy that allows me hone my critical thinking skills while helping others. I'm confident in my communication and team building skills, which has given me the opportunity to talk with and meet some amazing people.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">EDUCATION</h2>
+          <div class="text-body">
+            <p><strong>A-Levels:</strong> Mathematics, Further Mathematics, Physics</p>
+            <p>Predicted A* A* A*, planning on sitting TMUA and STEP.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">ASPIRATIONS</h2>
+          <div class="text-body">
+            <p>My goal is to be able to study Mathematics at a competitive university from some of the best academics in the world.</p>
+            <p>It's hard to really know what I really want out of life right now. But I know I want to make people happy.</p>
+          </div>
+        </div>
+
+        <footer>&copy; 2026 HARVEY LEWIS</footer>
+      </div>
     </div>
-  </main>
+  </div>
+
+  <script>
+    const heroCard = document.getElementById('hero-card');
+    const scrollHint = document.getElementById('scroll-hint');
+
+    // Handle Parallax scaling and fading for the hero
+    window.addEventListener('scroll', () => {
+      const scrollValue = window.scrollY;
+      const windowHeight = window.innerHeight;
+      
+      // Calculate progress (0 to 1) for the first screen height
+      const progress = Math.min(scrollValue / windowHeight, 1);
+      
+      // Scale down and fade out hero card
+      const scale = 1 - (progress * 0.15); // Scales from 1 to 0.85
+      const opacity = 1 - (progress * 1.5); // Fades out quicker
+      
+      heroCard.style.transform = `scale(${scale})`;
+      heroCard.style.opacity = opacity > 0 ? opacity : 0;
+      scrollHint.style.opacity = 1 - (progress * 4); // Fades hint out immediately
+    });
+
+    // Intersection Observer for secondary cards entrance
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.transform = "translateY(0)";
+          entry.target.style.opacity = "1";
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.scroll-container .card').forEach(card => {
+      observer.observe(card);
+    });
+  </script>
 </body>
 </html>
