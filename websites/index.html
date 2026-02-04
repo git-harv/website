@@ -116,7 +116,7 @@
       padding: 0 24px 100px;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 40px;
+      gap: 30px;
     }
 
     .project-card {
@@ -140,15 +140,15 @@
     }
 
     .project-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(170, 51, 51, 0.3);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 25px rgba(170, 51, 51, 0.4);
       border-color: var(--accent2);
     }
 
     /* Image Preview Container */
     .img-container {
       width: 100%;
-      height: 220px;
+      height: 240px;
       overflow: hidden;
       background: #000;
       position: relative;
@@ -159,65 +159,27 @@
       height: 100%;
       object-fit: cover;
       transition: transform 0.5s ease;
-      opacity: 0.8;
+      opacity: 0.7;
     }
 
     .project-card:hover .img-container img {
-      transform: scale(1.1);
+      transform: scale(1.08);
       opacity: 1;
     }
 
-    /* Label overlay */
-    .img-container::after {
-      content: 'VIEW PROJECT';
+    /* Simple Title Overlay inside the image container for a cleaner look */
+    .card-title-overlay {
       position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      background: rgba(170, 51, 51, 0.4);
-      font-weight: bold;
-      letter-spacing: 2px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .project-card:hover .img-container::after {
-      opacity: 1;
-    }
-
-    .card-content {
-      padding: 24px;
-    }
-
-    .card-title {
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.9));
       font-family: Impact, sans-serif;
-      font-size: 1.5rem;
-      color: var(--accent1);
-      margin: 0 0 10px;
+      font-size: 1.6rem;
+      color: #fff;
       letter-spacing: 1px;
-    }
-
-    .card-desc {
-      color: #e0e0e0;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .tag-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .tag {
-      font-size: 0.7rem;
-      padding: 4px 10px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
-      color: var(--muted);
       text-transform: uppercase;
-      font-weight: bold;
     }
 
     footer {
@@ -245,7 +207,7 @@
 
   <header>
     <h1 class="title">Web Projects</h1>
-    <p class="subtitle">A collection of web designs and concepts</p>
+    <p class="subtitle">A collection of designs and concepts</p>
   </header>
 
   <main class="projects-container">
@@ -253,14 +215,7 @@
     <a href="/websites/pizza" class="project-card">
       <div class="img-container">
         <img src="pizza-preview.jpg" alt="Pizza Website Preview" onerror="this.src='https://via.placeholder.com/400x250/022030/aa3333?text=Pizza+Place'">
-      </div>
-      <div class="card-content">
-        <h3 class="card-title">SLICE HEAVEN</h3>
-        <p class="card-desc">A modern, responsive e-commerce landing page for a premium pizzeria concept.</p>
-        <div class="tag-row">
-          <span class="tag">E-Commerce</span>
-          <span class="tag">UI/UX</span>
-        </div>
+        <div class="card-title-overlay">SLICE HEAVEN</div>
       </div>
     </a>
 
@@ -268,14 +223,7 @@
     <a href="/websites/math" class="project-card">
       <div class="img-container">
         <img src="math-preview.jpg" alt="Math Tool Preview" onerror="this.src='https://via.placeholder.com/400x250/022030/aa3333?text=Calculus+Helper'">
-      </div>
-      <div class="card-content">
-        <h3 class="card-title">EQUATION SOLVER</h3>
-        <p class="card-desc">A specialized tool for visualizing complex mathematical functions and solving calculus problems.</p>
-        <div class="tag-row">
-          <span class="tag">Education</span>
-          <span class="tag">Interactive</span>
-        </div>
+        <div class="card-title-overlay">EQUATION SOLVER</div>
       </div>
     </a>
 
@@ -283,14 +231,7 @@
     <a href="/websites/gaming" class="project-card">
       <div class="img-container">
         <img src="gaming-preview.jpg" alt="Gaming Blog Preview" onerror="this.src='https://via.placeholder.com/400x250/022030/aa3333?text=Gaming+Blog'">
-      </div>
-      <div class="card-content">
-        <h3 class="card-title">RESPAWN NEWS</h3>
-        <p class="card-desc">High-energy blog layout designed for competitive gaming news and reviews.</p>
-        <div class="tag-row">
-          <span class="tag">Blog</span>
-          <span class="tag">Dark Mode</span>
-        </div>
+        <div class="card-title-overlay">RESPAWN NEWS</div>
       </div>
     </a>
   </main>
@@ -304,7 +245,7 @@
       cards.forEach((card, index) => {
         setTimeout(() => {
           card.classList.add('visible');
-        }, index * 150);
+        }, index * 120);
       });
     });
   </script>
