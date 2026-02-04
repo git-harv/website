@@ -7,54 +7,247 @@
   <meta name="description" content="chillest place to be" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <style>
-    :root{--bgA:#022030;--bgB:#1b0033;--accent1:#aa3333;--accent2:#ff3333;--muted:#ffaaaa}
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font-family:Verdana,Helvetica,Arial,sans-serif;background:linear-gradient(135deg,var(--bgA),var(--bgB));color:#fffff}
+    :root {
+      --bgA: #022030;
+      --bgB: #1b0033;
+      --accent1: #aa3333;
+      --accent2: #ff3333;
+      --muted: #ffaaaa;
+      --cardBg: rgba(11, 12, 32, 0.6);
+    }
 
-    .grain{position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);background-size:3px 3px;mix-blend-mode:overlay;opacity:0.35}
-    .scan{position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(transparent 60%, rgba(255,255,255,0.02) 60%);background-size:100% 6px;opacity:0.2}
+    * { box-sizing: border-box; }
+    
+    html, body { 
+      height: 100%; 
+      margin: 0; 
+      overflow-x: hidden;
+    }
 
-    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-    .card{width:100%;max-width:900px;height:auto;padding:36px;border-radius:12px;background:rgba(11,12,32,0.4);backdrop-filter:blur(8px);border:2px solid var(--accent1);box-shadow:0 0 30px rgba(255,0,0,0.5),inset 0 0 20px rgba(255,0,0,0.3);display:flex;align-items:center;position:relative}
+    body {
+      font-family: Verdana, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, var(--bgA), var(--bgB));
+      color: #ffffff;
+    }
 
-    .brand{display:flex;gap:20px;align-items:center;padding:20px}
-    .logo{width:96px;height:96px;border-radius:12px;display:grid;place-items:center;font-weight:900;color:#071022;background:linear-gradient(135deg,var(--accent1),var(--accent2));font-size:22px;box-shadow:0 8px 40px rgba(0,0,0,0.6)}
+    /* Overlays */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 3px 3px;
+      mix-blend-mode: overlay;
+      opacity: 0.35;
+      z-index: 10;
+    }
 
-    .title{font-family:Impact,Charcoal,Arial Black,sans-serif;font-size:3.2rem;margin:0;color:var(--accent1);text-shadow:0 0 18px rgba(0,229,255,0.12),2px 2px 0 rgba(0,0,0,0.6)}
-    .subtitle{font-size:1rem;color:var(--muted);margin-top:6px}
+    .scan {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(transparent 60%, rgba(255, 255, 255, 0.02) 60%);
+      background-size: 100% 6px;
+      opacity: 0.2;
+      z-index: 11;
+    }
 
-    .row{display:flex;gap:12px;align-items:center;margin-top:18px}
-    .btn{display:inline-block;padding:10px 14px;border-radius:6px;text-decoration:none;color:#061026;background:linear-gradient(90deg,var(--accent1),var(--accent2));font-weight:700}
+    /* Layout */
+    .wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
 
-    .social{position:absolute;right:22px;top:22px;display:flex;gap:10px}
-    .social a{padding:8px 10px;border-radius:6px;background:rgba(255,255,255,0.03);color:var(--accent1);text-decoration:none;font-weight:700}
+    .card {
+      width: 100%;
+      max-width: 800px;
+      padding: 48px;
+      border-radius: 12px;
+      background: var(--cardBg);
+      backdrop-filter: blur(12px);
+      border: 2px solid var(--accent1);
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.3), inset 0 0 20px rgba(255, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
 
-    .content{margin-left:140px}
-    .visits{background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:6px;color:var(--muted);font-weight:700}
+    .brand {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      z-index: 2;
+    }
 
-    @media (max-width:720px){.brand{flex-direction:column;align-items:flex-start}.logo{width:72px;height:72px}.title{font-size:1.8rem}.content{margin-left:0}.card{padding:24px;border-radius:10px}.wrap{padding:16px}}
+    /* Image Styling */
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid var(--accent1);
+      box-shadow: 0 0 20px rgba(170, 51, 51, 0.5);
+      background: var(--bgA);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .profile-img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px var(--accent2);
+    }
+
+    .content {
+      flex: 1;
+    }
+
+    /* Typography */
+    .title {
+      font-family: Impact, Charcoal, 'Arial Black', sans-serif;
+      font-size: 3.5rem;
+      margin: 0;
+      color: var(--accent1);
+      letter-spacing: 2px;
+      text-shadow: 0 0 15px rgba(170, 51, 51, 0.4), 2px 2px 0 rgba(0, 0, 0, 0.8);
+      line-height: 1;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-top: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    /* Buttons */
+    .row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #ffffff;
+      background: var(--accent1);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn:hover {
+      background: var(--accent2);
+      box-shadow: 0 0 15px var(--accent2);
+      transform: translateY(-2px);
+    }
+
+    /* Socials */
+    .social {
+      position: absolute;
+      right: 24px;
+      top: 24px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .social a {
+      padding: 6px 12px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.75rem;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .social a:hover {
+      border-color: var(--accent1);
+      color: var(--accent1);
+      background: rgba(170, 51, 51, 0.1);
+    }
+
+    footer {
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      opacity: 0.6;
+      letter-spacing: 1px;
+    }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      .brand {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+      }
+      .profile-img {
+        width: 100px;
+        height: 100px;
+      }
+      .title {
+        font-size: 2.2rem;
+      }
+      .card {
+        padding: 32px;
+        margin: 16px;
+      }
+      .row {
+        justify-content: center;
+      }
+      .social {
+        position: static;
+        margin-bottom: 20px;
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
-  <main class="wrap" id="app">
-    <div class="card" role="main">
-      <div class="grain"></div>
-      <div class="scan"></div>
+  <div class="grain"></div>
+  <div class="scan"></div>
+
+  <main class="wrap">
+    <div class="card">
+      <!-- Top Socials -->
+      <div class="social">
+        <a href="https://www.linkedin.com/in/harvey-lewis-791176300/" target="_blank">LINKEDIN</a>
+      </div>
+
       <div class="brand">
-        <img src="hldog.png" alt="Logo" width="100">
+        <!-- Profile Image with fallback -->
+        <img 
+          src="hldog.png" 
+          alt="Harvey Lewis" 
+          class="profile-img" 
+          onerror="this.src='https://via.placeholder.com/120/022030/aa3333?text=HL'"
+        >
+        
         <div class="content">
           <h1 class="title">HARVEY LEWIS</h1>
-          <div class="subtitle">16 • A-levels student — aspiring Mathematician</div>
-          <div class="row" style="margin-top:20px">
-            <a class="btn" href="mailto:admin@harveylewis.co.uk">email</a>
+          <div class="subtitle">16 &bull; A-Levels Student &bull; Aspiring Mathematician</div>
+          
+          <div class="row">
+            <a class="btn" href="mailto:admin@harveylewis.co.uk">Get in Touch</a>
           </div>
         </div>
       </div>
-      <div class="social" aria-hidden="false">
-        <a href="https://www.linkedin.com/in/harvey-lewis-791176300/" title="LinkedIn">LinkedIn</a>
-      </div>
-      <footer style="position:absolute;left:22px;bottom:18px;color:var(--muted);font-size:0.9rem">© Harvey Lewis</footer>
+
+      <footer>&copy; 2026 HARVEY LEWIS /footer>
     </div>
   </main>
 </body>
