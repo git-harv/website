@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Pizza - Fast, Fresh, Delicious</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mr-red': '#D9232D', 
+                        'mr-green': '#006422', 
+                        'mr-yellow': '#FDB913', 
+                        'mr-black': '#231F20', 
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        #mobile-menu {
+            display: none;
+        }
+        #mobile-menu-button:focus ~ #mobile-menu,
+        #mobile-menu:hover {
+            display: block;
+        }
+        @media (min-width: 768px) {
+            #mobile-menu {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-mr-black">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 max-w-6xl">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-2">
+                    <img 
+                        src="image_a1263b.png" 
+                        alt="Mr. Pizza Logo" 
+                        class="h-14 w-auto"
+                        onerror="this.onerror=null; this.src='https://placehold.co/150x60/D9232D/FFFFFF?text=Mr.Pizza&font=inter';"
+                    >
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#home" class="text-gray-600 hover:text-mr-red transition duration-300 font-medium">Home</a>
+                    <a href="#menu" class="text-gray-600 hover:text-mr-red transition duration-300 font-medium">Menu</a>
+                    <a href="#about" class="text-gray-600 hover:text-mr-red transition duration-300 font-medium">About</a>
+                    <a href="#menu" class="bg-mr-red text-white px-5 py-2 rounded-full font-bold shadow-lg hover:bg-opacity-90 transition duration-300">
+                        View Menu
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-600 focus:outline-none" aria-label="Toggle menu">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full bg-white shadow-lg py-4 text-center">
+                <a href="#home" class="block px-4 py-3 text-gray-700 hover:bg-gray-100 font-medium">Home</a>
+                <a href="#menu" class="block px-4 py-3 text-gray-700 hover:bg-gray-100 font-medium">Menu</a>
+                <a href="#about" class="block px-4 py-3 text-gray-700 hover:bg-gray-100 font-medium">About</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="bg-white pt-10 md:pt-16">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
+                        <h1 class="text-4xl md:text-6xl font-extrabold text-mr-black leading-tight mb-4">
+                            Hot, Fresh &<br>
+                            <span class="text-mr-red">Seriously Cheesy.</span>
+                        </h1>
+                        <p class="text-lg text-gray-600 mb-8 max-w-md mx-auto md:mx-0">
+                            Experience the best pizza in town, made with love, fresh ingredients, and a dash of style. Mr. Pizza is here to serve you.
+                        </p>
+                        <a href="#menu" class="bg-mr-red text-white px-8 py-3 rounded-full font-bold text-lg shadow-xl hover:bg-opacity-90 transition duration-300 inline-flex items-center space-x-2">
+                            <span>View Our Menu</span>
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <img 
+                            src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800&auto=format&fit=crop" 
+                            alt="A delicious pizza" 
+                            class="rounded-full shadow-2xl w-3/4 md:w-full max-w-md border-8 border-white"
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Section (Column Grid Layout) -->
+        <section id="menu" class="py-16 md:py-24">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Our Full Menu</h2>
+                <p class="text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+                    Hand-crafted pizzas and savory sides delivered straight to your door.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Item 1 -->
+                    <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
+                        <div class="overflow-hidden h-48">
+                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=500&auto=format&fit=crop" alt="Donner Pizza" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">10" Donner Pizza</h3>
+                                <span class="text-mr-red font-bold">£10.99</span>
+                            </div>
+                            <p class="text-gray-500 text-sm">Fresh tomatoes, mozzarella, and perfectly seasoned donner meat.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
+                        <div class="overflow-hidden h-48">
+                            <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=500&auto=format&fit=crop" alt="Pepperoni Feast" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">Pepperoni Feast</h3>
+                                <span class="text-mr-red font-bold">£19.99</span>
+                            </div>
+                            <p class="text-gray-500 text-sm">Double pepperoni and double cheese on our signature thin crust.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
+                        <div class="overflow-hidden h-48">
+                            <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=80&w=500&auto=format&fit=crop" alt="BBQ Chicken" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">BBQ Chicken</h3>
+                                <span class="text-mr-red font-bold">£15.99</span>
+                            </div>
+                            <p class="text-gray-500 text-sm">Tender chicken pieces with smoky BBQ sauce and red onions.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
+                        <div class="overflow-hidden h-48">
+                            <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?q=80&w=500&auto=format&fit=crop" alt="Hawaiian" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">The Hawaiian</h3>
+                                <span class="text-mr-red font-bold">£13.99</span>
+                            </div>
+                            <p class="text-gray-500 text-sm">Sweet pineapple chunks and savory ham slices.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
+                        <div class="overflow-hidden h-48">
+                            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=500&auto=format&fit=crop" alt="Meat Lover" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">Meat Lover's</h3>
+                                <span class="text-mr-red font-bold">£17.99</span>
+                            </div>
+                            <p class="text-gray-500 text-sm">Pepperoni, sausage, ham, and bacon on a thick crust.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 6 -->
+                    <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
+                        <div class="overflow-hidden h-48">
+                            <img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707?q=80&w=500&auto=format&fit=crop" alt="Donner Kebab" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">Small Donner</h3>
+                                <span class="text-mr-red font-bold">£3.50</span>
+                            </div>
+                            <p class="text-gray-500 text-sm">A satisfying portion of spiced donner meat with pita.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2">
+                        <img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?q=80&w=800&auto=format&fit=crop" alt="Mr. Pizza's Kitchen" class="rounded-xl shadow-2xl w-full">
+                    </div>
+                    <div class="md:w-1/2 text-center md:text-left">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">Who is Mr. Pizza?</h2>
+                        <p class="text-lg text-gray-600 mb-6">
+                            Founded in 2024, Mr. Pizza started as a small dream with a big, red sign. Our mission is simple: serve unforgettable pizza that brings people together.
+                        </p>
+                        <p class="text-lg text-gray-600">
+                            From our secret-recipe dough to our locally-sourced toppings, every pizza is a masterpiece. Come on in and taste the difference.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Information/Contact Section -->
+        <section id="contact" class="py-16 md:py-24 bg-gray-100">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Visit Us</h2>
+                <div class="flex flex-col md:flex-row gap-8 items-stretch">
+                    <div class="w-full md:w-1/2 h-80 md:h-auto rounded-xl overflow-hidden shadow-lg min-h-[300px]">
+                        <iframe 
+                            class="w-full h-full border-0"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.9147703055!2d-74.119763973046!3d40.69740344223377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY!5e0!3m2!1sen!2susa!4v1677651234567!5m2!1sen!2susa" 
+                            allowfullscreen="" loading="lazy">
+                        </iframe>
+                    </div>
+                    <div class="w-full md:w-1/2 bg-white p-8 rounded-xl shadow-lg flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold mb-6">Our Info</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-mr-red text-white p-3 rounded-full flex-shrink-0">
+                                    <i data-lucide="map-pin" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold">Address</h4>
+                                    <p class="text-gray-600">123 Pizza Street, Flavor Town, USA 12345</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-mr-red text-white p-3 rounded-full flex-shrink-0">
+                                    <i data-lucide="phone" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold">Phone</h4>
+                                    <p class="text-gray-600">(555) 123-4567</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-mr-red text-white p-3 rounded-full flex-shrink-0">
+                                    <i data-lucide="mail" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold">Email</h4>
+                                    <p class="text-gray-600">hello@mrpizza.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-mr-black text-gray-300 py-12">
+        <div class="container mx-auto px-6 max-w-6xl text-center">
+            <img src="image_a1263b.png" alt="Mr. Pizza Logo" class="h-16 w-auto mx-auto mb-4" onerror="this.onerror=null; this.src='https://placehold.co/150x60/D9232D/FFFFFF?text=Mr.Pizza&font=inter';">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="hover:text-mr-red transition duration-300"><i data-lucide="facebook" class="w-6 h-6"></i></a>
+                <a href="#" class="hover:text-mr-red transition duration-300"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                <a href="#" class="hover:text-mr-red transition duration-300"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+            </div>
+            <p>&copy; 2025 Mr. Pizza. All Rights Reserved. </p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
