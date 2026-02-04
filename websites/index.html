@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Websites | Harvey Lewis</title>
+  <meta name="description" content="Showcase of web projects by Harvey Lewis" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <style>
+    :root {
+      --bgA: #022030;
+      --bgB: #1b0033;
+      --accent1: #aa3333;
+      --accent2: #ff3333;
+      --muted: #ffaaaa;
+      --cardBg: rgba(11, 12, 32, 0.85);
+    }
+
+    * { box-sizing: border-box; }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Verdana, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, var(--bgA), var(--bgB));
+      background-attachment: fixed;
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Overlays */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 3px 3px;
+      mix-blend-mode: overlay;
+      opacity: 0.35;
+      z-index: 10;
+    }
+
+    .scan {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(transparent 60%, rgba(255, 255, 255, 0.02) 60%);
+      background-size: 100% 6px;
+      opacity: 0.15;
+      z-index: 11;
+    }
+
+    /* Navigation */
+    .nav-group {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      display: flex;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .home-btn {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: bold;
+      box-shadow: 0 0 15px var(--accent1);
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+    }
+
+    .home-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px var(--accent2);
+    }
+
+    /* Header */
+    header {
+      padding: 120px 24px 60px;
+      text-align: center;
+    }
+
+    .title {
+      font-family: Impact, Charcoal, 'Arial Black', sans-serif;
+      font-size: 3.5rem;
+      margin: 0;
+      color: var(--accent1);
+      letter-spacing: 2px;
+      text-shadow: 0 0 15px rgba(170, 51, 51, 0.4), 2px 2px 0 rgba(0, 0, 0, 0.8);
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-top: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    /* Projects Grid */
+    .projects-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 40px;
+    }
+
+    .project-card {
+      background: var(--cardBg);
+      backdrop-filter: blur(12px);
+      border: 2px solid var(--accent1);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      opacity: 0;
+      transform: translateY(30px);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .project-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(170, 51, 51, 0.3);
+      border-color: var(--accent2);
+    }
+
+    /* Image Preview Container */
+    .img-container {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+    }
+
+    .img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      opacity: 0.8;
+    }
+
+    .project-card:hover .img-container img {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    /* Label overlay */
+    .img-container::after {
+      content: 'VIEW PROJECT';
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(170, 51, 51, 0.4);
+      font-weight: bold;
+      letter-spacing: 2px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-card:hover .img-container::after {
+      opacity: 1;
+    }
+
+    .card-content {
+      padding: 24px;
+    }
+
+    .card-title {
+      font-family: Impact, sans-serif;
+      font-size: 1.5rem;
+      color: var(--accent1);
+      margin: 0 0 10px;
+      letter-spacing: 1px;
+    }
+
+    .card-desc {
+      color: #e0e0e0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .tag-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 60px 0;
+      color: var(--muted);
+      font-size: 0.75rem;
+      opacity: 0.6;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 720px) {
+      .title { font-size: 2.5rem; }
+      .projects-container { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="scan"></div>
+
+  <div class="nav-group">
+    <a href="index.html" class="home-btn" title="Back to Portfolio">H</a>
+  </div>
+
+  <header>
+    <h1 class="title">Web Projects</h1>
+    <p class="subtitle">A collection of web designs and concepts</p>
+  </header>
+
+  <main class="projects-container">
+    <!-- Pizza Website -->
+    <a href="/websites/pizza" class="project-card">
+      <div class="img-container">
+        <img src="pizza-preview.jpg" alt="Pizza Website Preview" onerror="this.src='https://via.placeholder.com/400x250/022030/aa3333?text=Pizza+Place'">
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">SLICE HEAVEN</h3>
+        <p class="card-desc">A modern, responsive e-commerce landing page for a premium pizzeria concept.</p>
+        <div class="tag-row">
+          <span class="tag">E-Commerce</span>
+          <span class="tag">UI/UX</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Math Tool Website -->
+    <a href="/websites/math" class="project-card">
+      <div class="img-container">
+        <img src="math-preview.jpg" alt="Math Tool Preview" onerror="this.src='https://via.placeholder.com/400x250/022030/aa3333?text=Calculus+Helper'">
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">EQUATION SOLVER</h3>
+        <p class="card-desc">A specialized tool for visualizing complex mathematical functions and solving calculus problems.</p>
+        <div class="tag-row">
+          <span class="tag">Education</span>
+          <span class="tag">Interactive</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Gaming Blog -->
+    <a href="/websites/gaming" class="project-card">
+      <div class="img-container">
+        <img src="gaming-preview.jpg" alt="Gaming Blog Preview" onerror="this.src='https://via.placeholder.com/400x250/022030/aa3333?text=Gaming+Blog'">
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">RESPAWN NEWS</h3>
+        <p class="card-desc">High-energy blog layout designed for competitive gaming news and reviews.</p>
+        <div class="tag-row">
+          <span class="tag">Blog</span>
+          <span class="tag">Dark Mode</span>
+        </div>
+      </div>
+    </a>
+  </main>
+
+  <footer>&copy; 2026 HARVEY LEWIS // WEBSITES SHOWCASE</footer>
+
+  <script>
+    // Reveal cards one by one on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.project-card');
+      cards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('visible');
+        }, index * 150);
+      });
+    });
+  </script>
+</body>
+</html>
