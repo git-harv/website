@@ -53,11 +53,18 @@
       z-index: 11;
     }
 
-    /* Home Button */
-    .home-btn {
+    /* Home Button Group */
+    .nav-group {
       position: fixed;
       top: 24px;
       left: 24px;
+      display: flex;
+      align-items: center;
+      z-index: 100;
+      gap: 0;
+    }
+
+    .home-btn {
       width: 50px;
       height: 50px;
       background: linear-gradient(135deg, var(--accent1), var(--accent2));
@@ -67,15 +74,49 @@
       text-decoration: none;
       color: #ffffff;
       font-weight: bold;
-      z-index: 100;
       box-shadow: 0 0 15px var(--accent1);
       transition: all 0.3s ease;
       font-size: 1.2rem;
+      position: relative;
+      z-index: 2;
     }
 
-    .home-btn:hover {
+    .websites-link {
+      background: var(--accent1);
+      height: 40px;
+      padding: 0 20px 0 30px;
+      border-radius: 0 20px 20px 0;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-left: -25px;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+      z-index: 1;
+      white-space: nowrap;
+    }
+
+    .nav-group:hover .home-btn {
       transform: scale(1.1);
       box-shadow: 0 0 25px var(--accent2);
+    }
+
+    .nav-group:hover .websites-link {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .websites-link:hover {
+      background: var(--accent2);
+      box-shadow: 0 0 15px var(--accent2);
     }
 
     /* Parallax Structure */
@@ -300,7 +341,10 @@
   <div class="grain"></div>
   <div class="scan"></div>
 
-  <a href="#top" class="home-btn" title="Go to top">H</a>
+  <div class="nav-group">
+    <a href="#top" class="home-btn" title="Go to top">H</a>
+    <a href="https://harveylewis.co.uk/websites" class="websites-link">Websites</a>
+  </div>
 
   <div class="parallax-wrapper">
     <!-- Hero Landing Section -->
